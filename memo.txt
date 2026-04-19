@@ -27,6 +27,9 @@ test@localhost.com / testtest
 supabaseプロジェクト作成
 
 
+テーブル作成
+src/database/sqls
+
 
 cd ~/workspace/github/supabase-test/src
 

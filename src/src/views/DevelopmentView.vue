@@ -1,23 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { supabase } from '@/services/supabase/supabase';
 import LoginForm from '@/components/auth/LoginForm.vue';
+import Test from '@/components/development/Test.vue';
 
-async function getInstruments() {
-  const retComments = await supabase.from('comments').select()
-  console.log('retComments', retComments);
-
-  const retUser = await supabase.auth.getUser()
-  console.log('retUser', retUser);
-}
-onMounted(() => {
-   getInstruments()
-})
+const sectionClass = 'border-2 p-5';
 </script>
 
 <template>
   <div>
     開発者向けページ
-    <LoginForm />
+
+    <div class="space-y-5 mt-10">
+      <div :class="sectionClass">
+        <LoginForm />
+      </div>
+      <div :class="sectionClass">
+        <Test />
+      </div>
+    </div>
   </div>
 </template>

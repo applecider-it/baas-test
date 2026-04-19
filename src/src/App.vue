@@ -3,11 +3,11 @@ import { RouterLink, RouterView } from 'vue-router';
 </script>
 
 <template>
-  <div>
-    <div class="p-5">
-      <RouterLink to="/">Home</RouterLink>
-    </div>
+  <div class="p-5 bg-gray-200">
+    <RouterLink to="/">Home</RouterLink>
   </div>
 
-  <RouterView />
+  <div class="p-3">
+    <RouterView />
+  </div>
 </template>
