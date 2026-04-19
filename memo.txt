@@ -11,7 +11,7 @@ vue: 5173
 
 vue
 
-cd ~/workspace/github/supabase-test/vue
+cd ~/workspace/github/supabase-test/src
 
 npm run dev
 
