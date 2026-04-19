@@ -7,3 +7,17 @@ npx tailwindcss init -p
 
 npm install @supabase/supabase-js
 
+npm install -g supabase
+
+npx supabase login
+
+sudo apt update
+sudo apt install wslu
+
+npx supabase init
+npx supabase functions new hello
+npx supabase functions serve hello
+
+npx supabase start
+
+npx supabase functions deploy hello

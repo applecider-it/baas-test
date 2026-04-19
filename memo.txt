@@ -19,6 +19,15 @@ http://localhost:5173/
 
 test@localhost.com / testtest
 
+-----------------------------------
+
+supabase
+
+cd ~/workspace/github/supabase-test/src
+
+npx supabase functions new hello
+
+
 
 -----------------------------------
 
@@ -40,6 +49,17 @@ npm ci
 cp .env.example .env
 
 設定を変更
+
+
+
+Docker起動
+
+cd ~/workspace/github/supabase-test/sb
+
+npx supabase login
+
+npx supabase start
+
 
 -----------------------------------
 
