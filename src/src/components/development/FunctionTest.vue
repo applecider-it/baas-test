@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { supabase, sentFunction } from '@/services/supabase/supabase';
+import { supabaseFunction, sendFunction } from '@/services/supabase/supabase';
 
 const handleFunctionTest = async () => {
-  const ret = await sentFunction('hello', { name: 'テスト' });
+  const ret = await sendFunction('hello', { name: 'テスト' });
 
   console.log('handleFunctionTest', ret);
+
+  const ret2 = await supabaseFunction.functions.invoke('hello', {
+    body: { name: 'テスト2' },
+  });
+
+  console.log('ret2.data', ret2.data);
 };
 </script>
 

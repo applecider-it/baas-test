@@ -23,10 +23,15 @@ test@localhost.com / testtest
 
 supabase
 
-cd ~/workspace/github/supabase-test/src
+cd ~/workspace/github/supabase-test/sb
 
-npx supabase functions new hello
+npx supabase functions serve hello
 
+
+
+curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/hello' \
+  --header 'Content-Type: application/json' \
+  --data '{"name":"Functions"}'
 
 
 -----------------------------------
