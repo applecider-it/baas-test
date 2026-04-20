@@ -4,6 +4,7 @@
 
 // Setup type definitions for built-in Supabase Runtime APIs
 import '@supabase/functions-js/edge-runtime.d.ts';
+import { createClient } from "npm:@supabase/supabase-js@2";
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -14,16 +15,41 @@ const corsHeaders = {
 
 console.log('Hello from Functions!');
 
+const supabaseUrl = Deno.env.get('APP_SUPABASE_URL')!;
+const supabasePublishableKey = Deno.env.get('APP_SUPABASE_PUBLISHABLE_KEY')!;
+
+console.log({ supabaseUrl, supabasePublishableKey });
+
 Deno.serve(async (req) => {
   // preflight request
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
+  const authHeader = req.headers.get('Authorization');
+
+  console.log({ authHeader });
+
+  const supabase = createClient(
+    supabaseUrl,
+    supabasePublishableKey,
+    {
+      global: {
+        headers: {
+          Authorization: authHeader ?? '',
+        },
+      },
+    },
+  );
+
   const { name } = await req.json();
   const data = {
     message: `Hello ${name}!`,
   };
+
+  const retUser = await supabase.auth.getUser();
+
+  console.log({ retUser });
 
   return new Response(JSON.stringify(data), {
     headers: {

@@ -23,16 +23,17 @@ test@localhost.com / testtest
 
 supabase
 
+Docker起動
+
 cd ~/workspace/github/supabase-test/sb
 
-npx supabase functions serve hello
+npx supabase functions serve --env-file .env
 
 
 
 curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/hello' \
   --header 'Content-Type: application/json' \
   --data '{"name":"Functions"}'
-
 
 -----------------------------------
 
