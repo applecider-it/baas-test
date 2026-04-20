@@ -1,5 +1,5 @@
 
-cd ~/workspace/github/supabase-test
+cd ~/workspace/github/baas-test
 
 -----------------------------------
 
@@ -11,7 +11,7 @@ vue: 5173
 
 vue
 
-cd ~/workspace/github/supabase-test/src
+cd ~/workspace/github/baas-test/src
 
 npm run dev
 
@@ -25,7 +25,7 @@ supabase
 
 Docker起動
 
-cd ~/workspace/github/supabase-test/sb
+cd ~/workspace/github/baas-test/sb
 
 npx supabase functions serve --env-file .env
 
@@ -66,7 +66,7 @@ src/database/sqls
 
 vue
 
-cd ~/workspace/github/supabase-test/src
+cd ~/workspace/github/baas-test/src
 
 npm ci
 
@@ -81,7 +81,7 @@ supabase edge function
 
 Docker起動
 
-cd ~/workspace/github/supabase-test/sb
+cd ~/workspace/github/baas-test/sb
 
 npx supabase login
 
@@ -93,7 +93,7 @@ npx supabase start
 firebase function
 
 
-cd ~/workspace/github/supabase-test/fb
+cd ~/workspace/github/baas-test/fb
 
 firebase login
 
