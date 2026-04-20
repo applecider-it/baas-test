@@ -21,3 +21,9 @@ npx supabase functions serve hello
 npx supabase start
 
 npx supabase functions deploy hello
+
+-----------------------------------
+
+
+npm install firebase
+
