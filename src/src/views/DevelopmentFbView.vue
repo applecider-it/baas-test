@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import Test from '@/components/development/fb/Test.vue';
+import TweetTest from '@/components/development/fb/TweetTest.vue';
+import AuthTest from '@/components/development/fb/AuthTest.vue';
 
 const sectionClass = 'border-2 p-5';
 </script>
@@ -10,7 +11,10 @@ const sectionClass = 'border-2 p-5';
 
     <div class="space-y-5 mt-10">
       <div :class="sectionClass">
-        <Test />
+        <AuthTest />
+      </div>
+      <div :class="sectionClass">
+        <TweetTest />
       </div>
     </div>
   </div>

@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import {
+  getAuth,
+  onAuthStateChanged
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,3 +21,20 @@ console.log(firebaseConfig)
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 const analytics = getAnalytics(app);
+export const auth = getAuth(app);
+
+let authUser: any = null;
+
+onAuthStateChanged(auth, (user) => {
+  authUser = user;
+
+  if (user) {
+    console.log('ログイン中', user);
+  } else {
+    console.log('未ログイン', user);
+  }
+});
+
+export function getAuthUser() {
+  return authUser;
+}

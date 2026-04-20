@@ -1,23 +1,45 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { supabase } from '@/services/supabase/supabase';
+
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+
+import { auth } from '@/services/firebase/firebase';
 
 const email = ref(import.meta.env.VITE_TESTUSER_EMAIL);
 const password = ref('testtest');
 
 const errors = ref<any>({});
 
-const router = useRouter();
+/** サインアップ処理実行 */
+const execSignup = async () => {
+  const ret = await createUserWithEmailAndPassword(
+    auth,
+    email.value,
+    password.value,
+  );
+
+  console.log('execSignup', ret);
+};
 
 /** ログイン処理実行 */
 const execLogin = async () => {
-  const ret = await supabase.auth.signInWithPassword({
-    email: email.value,
-    password: password.value,
-  });
+  const ret = await signInWithEmailAndPassword(
+    auth,
+    email.value,
+    password.value,
+  );
 
   console.log('execLogin', ret);
+};
+
+/** ログアウト処理実行 */
+const handleLogout = async () => {
+  const retLogout = await signOut(auth);
+  console.log('handleLogout', retLogout);
 };
 </script>
 
@@ -46,6 +68,14 @@ const execLogin = async () => {
 
     <div>
       <button @click="execLogin" class="app-btn-primary">ログイン</button>
+    </div>
+
+    <div>
+      <button @click="execSignup" class="app-btn-primary">サインアップ</button>
+    </div>
+
+    <div>
+      <button @click="handleLogout" class="app-btn-primary">ログアウト</button>
     </div>
   </div>
 </template>
