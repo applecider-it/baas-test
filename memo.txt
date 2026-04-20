@@ -35,6 +35,16 @@ curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/hello' \
   --header 'Content-Type: application/json' \
   --data '{"name":"Functions"}'
 
+
+デプロイ
+
+npx supabase functions deploy
+
+
+npx supabase secrets set APP_SUPABASE_URL=https://[project-id].supabase.co
+npx supabase secrets set APP_SUPABASE_PUBLISHABLE_KEY=sb_publishable_?????
+
+
 -----------------------------------
 
 セットアップ

@@ -5,7 +5,7 @@
 // Setup type definitions for built-in Supabase Runtime APIs
 import '@supabase/functions-js/edge-runtime.d.ts';
 import { getSupabase } from '../../services/app/supabase.ts';
-import { execCors } from '../../services/server/cors.ts';
+import { execCors, corsHeaders } from '../../services/server/cors.ts';
 
 console.log('Hello from Functions!');
 
@@ -28,6 +28,7 @@ Deno.serve(async (req) => {
   return new Response(JSON.stringify(data), {
     headers: {
       'Content-Type': 'application/json',
+      ...corsHeaders
     },
   });
 });
