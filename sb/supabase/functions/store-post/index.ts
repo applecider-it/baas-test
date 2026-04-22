@@ -8,11 +8,15 @@ import {
   getSupabaseWithAuth,
   getSupabaseNoAuth,
 } from '../../services/app/supabase.ts';
+import { execCors, corsHeaders } from '../../services/server/cors.ts';
 import { storePost } from '../../services/post/post.ts';
 
 console.log('Hello from Functions!');
 
 Deno.serve(async (req) => {
+  const corsRet = execCors(req);
+  if (corsRet) return corsRet;
+
   const supabaseWithAuth = await getSupabaseWithAuth(req);
   const supabaseNoAuth = await getSupabaseNoAuth(req);
 
@@ -36,7 +40,10 @@ Deno.serve(async (req) => {
   }
 
   return new Response(JSON.stringify(data), {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...corsHeaders,
+    },
   });
 });
 
