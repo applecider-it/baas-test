@@ -13,3 +13,7 @@ Firebaseは、同じ理由でも、おすすめできない。
 ただ、実装が特殊になるため、特殊な実装をしたいという欲求は満たせると思います。
 
 どちらも、かなり限定的な用途向けだけど、Firebaseは特に限定的。
+
+一番正解に近い、croudflare workersに、認証の仕組みがあってpostgresだったら一番いいけど。
+
+croudflare workersの実装例は、`astro-app-worker`参照。
