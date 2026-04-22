@@ -59,6 +59,9 @@ Keyなどの確認
 npx supabase start
 
 
+npx supabase stop
+npx supabase start
+
 -----------------------------------
 
 セットアップ
@@ -105,6 +108,11 @@ npx supabase login
 npx supabase start
 
   public keyを/src/.envに書き込む
+  ローカルホストは
+  出力された値じゃなく
+  http://kong:8000
+  を使う
+
 
 npx supabase db reset
 
