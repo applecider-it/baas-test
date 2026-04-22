@@ -18,13 +18,16 @@ Deno.serve(async (req) => {
 
   const retUser = await supabase.auth.getUser();
 
-  const posts = await getPosts(supabase)
+  const retPosts = await getPosts(supabase)
+
+  const posts = retPosts.data;
 
   console.log({ retUser, posts });
 
   const data = {
     user: retUser.data.user,
     posts,
+    retPosts,
   };
 
   return new Response(JSON.stringify(data), {

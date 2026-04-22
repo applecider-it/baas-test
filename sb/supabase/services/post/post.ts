@@ -15,7 +15,5 @@ export const getPosts = async (supabase) => {
 
   console.log({retPosts})
 
-  const posts = retPosts.data;
-
-  return posts;
+  return retPosts;
 };

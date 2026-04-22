@@ -28,9 +28,10 @@ export const getPosts = async () => {
 export const getPostsByFunc = async () => {
   const ret = await execFunction('posts', { name: 'テスト' });
 
+  console.log('getPostsByFunc', ret);
+
   return ret.data;
 };
-
 
 /** ツイート送信 */
 export const postPost = async (content: string) => {
