@@ -4,7 +4,7 @@
 
 // Setup type definitions for built-in Supabase Runtime APIs
 import '@supabase/functions-js/edge-runtime.d.ts';
-import { getSupabase } from '../../services/app/supabase.ts';
+import { getSupabase, getSupabaseNoAuth } from '../../services/app/supabase.ts';
 import { execCors, corsHeaders } from '../../services/server/cors.ts';
 import { getPosts } from '../../services/post/post.ts';
 
@@ -15,10 +15,11 @@ Deno.serve(async (req) => {
   if (corsRet) return corsRet;
 
   const supabase = await getSupabase(req);
+  const supabaseNoAuth = await getSupabaseNoAuth(req);
 
   const retUser = await supabase.auth.getUser();
 
-  const retPosts = await getPosts(supabase)
+  const retPosts = await getPosts(supabaseNoAuth)
 
   const posts = retPosts.data;
 

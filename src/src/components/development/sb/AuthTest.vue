@@ -22,8 +22,9 @@ const execLogin = async () => {
 };
 
 const handleGetAuthUser = async () => {
-  const user = await getAuthUser();
-  console.log('handleGetAuthUser', user);
+  const ret = await getAuthUser();
+  console.log('handleGetAuthUser', ret);
+  console.log('ret?.user', ret?.user);
 };
 
 const handleLogout = async () => {

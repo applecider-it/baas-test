@@ -2,7 +2,7 @@ import { supabase, execFunction } from '@/services/supabase/supabase';
 
 import { getAuthUser } from '@/services/supabase/user/auth';
 
-/** ツイート一覧取得 */
+/** 投稿一覧取得 */
 export const getPosts = async () => {
   const retPosts = await supabase
     .from('user_posts')
@@ -24,7 +24,7 @@ export const getPosts = async () => {
   return posts;
 };
 
-/** エッジ関数からツイート一覧取得 */
+/** エッジ関数から投稿一覧取得 */
 export const getPostsByFunc = async () => {
   const ret = await execFunction('posts', { name: 'テスト' });
 
@@ -33,7 +33,7 @@ export const getPostsByFunc = async () => {
   return ret.data;
 };
 
-/** ツイート送信 */
+/** 投稿送信 */
 export const postPost = async (content: string) => {
   const auth = await getAuthUser();
 
@@ -42,8 +42,10 @@ export const postPost = async (content: string) => {
     return;
   }
 
-  await supabase.from('user_posts').insert({
+  const result = await supabase.from('user_posts').insert({
     user_id: auth.user.id,
     content,
   });
+
+  console.log({result})
 };

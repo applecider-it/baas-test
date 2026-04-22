@@ -27,16 +27,7 @@ ALTER TABLE ONLY "public"."user_posts"
     ADD CONSTRAINT "user_posts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE CASCADE;
 
 
-CREATE POLICY "Anyone can read user_posts" ON "public"."user_posts" FOR SELECT USING (true);
-
-
-CREATE POLICY "Authenticated can insert" ON "public"."user_posts" FOR INSERT TO "authenticated" WITH CHECK (("auth"."uid"() = "user_id"));
-
-
-CREATE POLICY "Delete own user_posts" ON "public"."user_posts" FOR DELETE TO "authenticated" USING (("auth"."uid"() = "user_id"));
-
-
-CREATE POLICY "Users can update own user_posts" ON "public"."user_posts" FOR UPDATE TO "authenticated" USING (("auth"."uid"() = "user_id")) WITH CHECK (("auth"."uid"() = "user_id"));
+CREATE POLICY "service_role only" ON "public"."user_posts" FOR ALL TO "service_role" USING (true);
 
 
 ALTER TABLE "public"."user_posts" ENABLE ROW LEVEL SECURITY;
