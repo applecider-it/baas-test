@@ -3,21 +3,39 @@
 // This enables autocomplete, go to definition, etc.
 
 // Setup type definitions for built-in Supabase Runtime APIs
-import "@supabase/functions-js/edge-runtime.d.ts"
+import '@supabase/functions-js/edge-runtime.d.ts';
+import { getSupabase } from '../../services/app/supabase.ts';
+import { execCors, corsHeaders } from '../../services/server/cors.ts';
+import { getPosts } from '../../services/post/post.ts';
 
-console.log("Hello from Functions!")
+console.log('Hello from Functions!');
 
 Deno.serve(async (req) => {
-  const { name } = await req.json()
+  const corsRet = execCors(req);
+  if (corsRet) return corsRet;
+
+  const { name } = await req.json();
+
+  const supabase = await getSupabase(req);
+
+  const retUser = await supabase.auth.getUser();
+
+  const posts = await getPosts(supabase)
+
+  console.log({ retUser, posts });
+
   const data = {
     message: `Hello ${name}!`,
-  }
+    user: retUser.data.user,
+  };
 
-  return new Response(
-    JSON.stringify(data),
-    { headers: { "Content-Type": "application/json" } },
-  )
-})
+  return new Response(JSON.stringify(data), {
+    headers: {
+      'Content-Type': 'application/json',
+      ...corsHeaders,
+    },
+  });
+});
 
 /* To invoke locally:
 

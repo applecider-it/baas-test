@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AuthTest from '@/components/development/sb/AuthTest.vue';
 import TweetTest from '@/components/development/sb/TweetTest.vue';
+import PostTest from '@/components/development/sb/PostTest.vue';
 import FunctionTest from '@/components/development/sb/FunctionTest.vue';
 
 const sectionClass = 'border-2 p-5';
@@ -13,6 +14,9 @@ const sectionClass = 'border-2 p-5';
     <div class="space-y-5 mt-10">
       <div :class="sectionClass">
         <AuthTest />
+      </div>
+      <div :class="sectionClass">
+        <PostTest />
       </div>
       <div :class="sectionClass">
         <TweetTest />
