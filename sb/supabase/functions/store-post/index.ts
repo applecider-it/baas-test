@@ -3,21 +3,42 @@
 // This enables autocomplete, go to definition, etc.
 
 // Setup type definitions for built-in Supabase Runtime APIs
-import "@supabase/functions-js/edge-runtime.d.ts"
+import '@supabase/functions-js/edge-runtime.d.ts';
+import {
+  getSupabaseWithAuth,
+  getSupabaseNoAuth,
+} from '../../services/app/supabase.ts';
+import { storePost } from '../../services/post/post.ts';
 
-console.log("Hello from Functions!")
+console.log('Hello from Functions!');
 
 Deno.serve(async (req) => {
-  const { name } = await req.json()
+  const supabaseWithAuth = await getSupabaseWithAuth(req);
+  const supabaseNoAuth = await getSupabaseNoAuth(req);
+
+  const retUser = await supabaseWithAuth.auth.getUser();
+
+  const user = retUser.data.user;
+
+  const { content } = await req.json();
+
   const data = {
-    message: `Hello ${name}!`,
+    user,
+    content,
+    status: 'ok',
+    result: null,
+  };
+
+  if (user) {
+    data.result = await storePost(supabaseNoAuth, user, content);
+  } else {
+    data.status = 'auth-error';
   }
 
-  return new Response(
-    JSON.stringify(data),
-    { headers: { "Content-Type": "application/json" } },
-  )
-})
+  return new Response(JSON.stringify(data), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+});
 
 /* To invoke locally:
 

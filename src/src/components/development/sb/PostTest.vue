@@ -4,6 +4,7 @@ import {
   getPosts,
   getPostsByFunc,
   postPost,
+  storePostByFunc,
 } from '@/services/supabase/post/post';
 
 const content = ref('テスト投稿');
@@ -37,6 +38,12 @@ const handlePostPost = async () => {
   const ret = await postPost(content.value);
   console.log('handlePostPost', ret);
 };
+
+const handlePostPostByFunc = async () => {
+  const ret = await storePostByFunc(content.value);
+  console.log('handlePostPostByFunc', ret);
+  console.log('ret.data', ret.data);
+};
 </script>
 
 <template>
@@ -49,7 +56,14 @@ const handlePostPost = async () => {
     </div>
     <div>
       <input type="text" v-model="content" class="app-form-input" />
-      <button @click="handlePostPost" class="app-btn-primary">投稿作成</button>
+      <div class="space-x-3">
+        <button @click="handlePostPost" class="app-btn-primary">
+          投稿作成
+        </button>
+        <button @click="handlePostPostByFunc" class="app-btn-primary">
+          投稿作成(Func)
+        </button>
+      </div>
     </div>
 
     <div class="space-y-4">

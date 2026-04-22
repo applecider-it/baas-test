@@ -1,4 +1,4 @@
-import { supabase, execFunction } from '@/services/supabase/supabase';
+import { supabase } from '@/services/supabase/supabase';
 
 import { getAuthUser } from '@/services/supabase/user/auth';
 
@@ -26,7 +26,7 @@ export const getPosts = async () => {
 
 /** エッジ関数から投稿一覧取得 */
 export const getPostsByFunc = async () => {
-  const ret = await execFunction('posts', { name: 'テスト' });
+  const ret = await supabase.functions.invoke('posts');
 
   console.log('getPostsByFunc', ret);
 
@@ -47,5 +47,16 @@ export const postPost = async (content: string) => {
     content,
   });
 
-  console.log({result})
+  console.log({ result });
+};
+
+/** エッジ関数から投稿送信 */
+export const storePostByFunc = async (content: string) => {
+  const result = await supabase.functions.invoke('store-post', {
+    body: { content },
+  });
+
+  console.log('storePostByFunc', result);
+
+  return result;
 };
