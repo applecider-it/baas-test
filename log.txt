@@ -61,3 +61,5 @@ docker logs -f supabase_edge_runtime_sb
 
 
 npx supabase functions new posts
+
+npx supabase functions new store-post

@@ -426,3 +426,14 @@ entrypoint = "./functions/posts/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/posts/*.html" ]
+
+[functions.store-post]
+enabled = true
+verify_jwt = true
+import_map = "./functions/store-post/deno.json"
+# Uncomment to specify a custom file path to the entrypoint.
+# Supported file extensions are: .ts, .js, .mjs, .jsx, .tsx
+entrypoint = "./functions/store-post/index.ts"
+# Specifies static files to be bundled with the function. Supports glob patterns.
+# For example, if you want to serve static HTML pages in your function:
+# static_files = [ "./functions/store-post/*.html" ]
