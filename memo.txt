@@ -119,5 +119,11 @@ npx supabase start
 
 npx supabase db reset
 
+----
+
+supabase管理画面での設定
+
+Database -> Publications -> supabase_realtime (0 tables) -> user_tweets	publicを有効にする
+
 -----------------------------------
 

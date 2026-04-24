@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { getTweets, postTweet } from '@/services/tweet/tweet';
+import { getTweets, postTweet, receiveTweets } from '@/services/tweet/tweet';
 
 const content = ref('テストツイート');
 const tweets = ref<any[]>([]);
@@ -15,6 +15,12 @@ const handleGetTweets = async () => {
   tweets.value = ret;
 };
 
+const handleReceiveTweets = async () => {
+  const ret = await receiveTweets();
+
+  console.log('handleReceiveTweets', ret);
+};
+
 const handlePostTweet = async () => {
   const ret = await postTweet(content.value);
   console.log('handlePostTweet', ret);
@@ -23,9 +29,13 @@ const handlePostTweet = async () => {
 
 <template>
   <div class="space-y-5 border p-5">
-    <div>
+    <div class="space-x-3">
       <button @click="handleGetTweets" class="app-btn-primary">
         ツイート取得
+      </button>
+
+      <button @click="handleReceiveTweets" class="app-btn-primary">
+        ツイート受信
       </button>
     </div>
     <div>

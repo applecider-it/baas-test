@@ -38,3 +38,21 @@ export const postTweet = async (content: string) => {
     content,
   });
 };
+
+/** ツイート受信開始 */
+export const receiveTweets = async () => {
+  supabase
+    .channel('user_tweets')
+    .on(
+      'postgres_changes',
+      {
+        event: 'INSERT',
+        schema: 'public',
+        table: 'user_tweets',
+      },
+      (payload) => {
+        console.log('新しいメッセージ', payload.new);
+      },
+    )
+    .subscribe();
+};
