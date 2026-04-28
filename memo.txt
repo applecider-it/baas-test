@@ -27,6 +27,15 @@ Docker起動
 
 cd ~/workspace/github/supabase-test/sb
 
+必要な場合
+  npx supabase start
+
+  止めたいとき
+    npx supabase stop
+
+    止めないとコンテナが残る
+    一度止めると、再開する時、少し時間がかかる
+
 npx supabase functions serve --env-file .env
 
 
